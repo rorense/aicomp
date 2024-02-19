@@ -9,3 +9,4 @@ Tech Stacks Used:
 - Tailwind
 - MySQL
 - ShadCN (UI components)
+- Clerk (authentication)
