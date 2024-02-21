@@ -10,9 +10,11 @@ const SearchInput = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // Returns the first value associated with the search parameter
   const categoryId = searchParams.get("categoryId");
   const name = searchParams.get("name");
 
+  // Value on the search input field
   const [value, setValue] = useState(name || "");
   const debouncedValue = useDebounce<string>(value, 500);
 

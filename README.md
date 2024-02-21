@@ -7,7 +7,7 @@ Tech Stacks Used:
 - Stripe
 - Prisma
 - Tailwind
-- MySQL
+- PLanetScale & MySQL (database)
 - ShadCN (UI components)
 - Clerk (authentication)
 - Query-string (URL parsing)
