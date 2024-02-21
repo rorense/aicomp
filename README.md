@@ -10,3 +10,4 @@ Tech Stacks Used:
 - MySQL
 - ShadCN (UI components)
 - Clerk (authentication)
+- Query-string (URL parsing)

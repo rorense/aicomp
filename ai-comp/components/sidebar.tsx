@@ -8,6 +8,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  //   Routes for the sidebar components
   const routes = [
     {
       icon: Home,
@@ -29,6 +30,7 @@ const Sidebar = () => {
     },
   ];
 
+  //   Redirect to the selected url
   const onNavigate = (url: string, pro: boolean) => {
     return router.push(url);
   };
@@ -41,6 +43,7 @@ const Sidebar = () => {
             <div
               onClick={() => onNavigate(route.href, route.pro)}
               key={route.href}
+              // By using cn utility function, we can assingn different background color depending on the current url
               className={cn(
                 "text-muted-foreground text-xs group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition",
                 pathname === route.href && "bg-primary/10 text-primary"
