@@ -11,3 +11,4 @@ Tech Stacks Used:
 - ShadCN (UI components)
 - Clerk (authentication)
 - Query-string (URL parsing)
+- Cloudinary (Image Uploading)
