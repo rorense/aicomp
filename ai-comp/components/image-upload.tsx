@@ -10,6 +10,7 @@ interface ImageUploadProps {
   disabled?: boolean;
 }
 
+// Cloudinary image uploader
 export const ImageUpload = ({
   value,
   onChange,
