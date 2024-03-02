@@ -30,7 +30,7 @@ const Sidebar = () => {
     },
   ];
 
-  //   Redirect to the selected url
+  //   Redirect to the selected url.
   const onNavigate = (url: string, pro: boolean) => {
     return router.push(url);
   };
