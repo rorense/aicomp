@@ -60,7 +60,7 @@ const formSchema = z.object({
   description: z.string().min(1, {
     message: "Description is required",
   }),
-  instructions: z.string().min(200, {
+  instruction: z.string().min(200, {
     message: "Instructions are required to be atleast 200 characters",
   }),
   seed: z.string().min(200, {
@@ -85,7 +85,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
     defaultValues: initialData || {
       name: "",
       description: "",
-      instructions: "",
+      instruction: "",
       seed: "",
       src: "",
       categoryId: undefined,
@@ -238,7 +238,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
             <Separator className="bg-primary/10" />
           </div>
           <FormField
-            name="instructions"
+            name="instruction"
             control={form.control}
             render={({ field }) => (
               <FormItem className="col-span-2 md:col-span-1">
