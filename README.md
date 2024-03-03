@@ -12,3 +12,4 @@ Tech Stacks Used:
 - Clerk (authentication)
 - Query-string (URL parsing)
 - Cloudinary (Image Uploading)
+- Axios
