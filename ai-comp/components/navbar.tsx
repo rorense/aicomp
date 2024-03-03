@@ -26,7 +26,7 @@ const Navabr = () => {
               font.className
             )}
           >
-            Companion.ai
+            Associate.ai
           </h1>
         </Link>
       </div>
