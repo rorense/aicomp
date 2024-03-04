@@ -50,3 +50,14 @@ export async function PATCH(
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { companionId: string } }
+) {
+  try {
+  } catch (error) {
+    console.log("[COMPANION_DELETE}", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
