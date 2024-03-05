@@ -13,3 +13,5 @@ Tech Stacks Used:
 - Query-string (URL parsing)
 - Cloudinary (Image Uploading)
 - Axios
+- ai (npm)
+- React-Spinners (load state)
