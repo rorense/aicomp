@@ -16,6 +16,7 @@ export interface ChatMessageProps {
   src?: string;
 }
 
+// The actual chat messagges component
 const ChatMessage = ({ role, content, isLoading, src }: ChatMessageProps) => {
   const { toast } = useToast();
   const { theme } = useTheme();
@@ -33,12 +34,15 @@ const ChatMessage = ({ role, content, isLoading, src }: ChatMessageProps) => {
 
   return (
     <div
+      // If the role is user, the message will be aligned to the right, if not, it will be aligned to the left
       className={cn(
         "group flex items-start gap-x-3 py-4 w-full",
         role === "user" && "justify-end"
       )}
     >
+      {/* If the role is the system display bot avatar */}
       {role !== "user" && src && <BotAvatar src={src} />}
+      {/* Display the content of the messages */}
       <div className="rounded-md px-4 py-2 max-w-sm bg-primary/10">
         {isLoading ? (
           <BeatLoader size={5} color={theme === "light" ? "black" : "white"} />
@@ -46,7 +50,9 @@ const ChatMessage = ({ role, content, isLoading, src }: ChatMessageProps) => {
           content
         )}
       </div>
+      {/* If it is the user, display user avatar */}
       {role === "user" && <UserAvatar />}
+      {/* If the message is from the bot and is not loading display the copy button */}
       {role !== "user" && !isLoading && (
         <Button
           onClick={onCopy}
