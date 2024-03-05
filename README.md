@@ -15,3 +15,7 @@ Tech Stacks Used:
 - Axios
 - ai (npm)
 - React-Spinners (load state)
+- Pine-cone database (Ai database)
+- Upstash Redis (Long term memory)
+- Langchain
+- OpenAI
