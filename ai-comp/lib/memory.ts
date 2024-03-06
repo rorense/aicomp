@@ -16,16 +16,9 @@ export class MemoryManager {
 
   public constructor() {
     this.history = Redis.fromEnv();
-    this.vectorDBClient = new Pinecone();
-  }
-
-  public async init() {
-    if (this.vectorDBClient instanceof Pinecone) {
-      await (this.vectorDBClient as any).init({
-        apiKey: process.env.PINECONE_API_KEY!,
-        environment: process.env.PINECONE_ENVIRONMENT!,
-      });
-    }
+    this.vectorDBClient = new Pinecone({
+      apiKey: process.env.PINECONE_API_KEY!,
+    });
   }
 
   public async vectorSearch(
@@ -54,7 +47,6 @@ export class MemoryManager {
   public static async getInstance(): Promise<MemoryManager> {
     if (!MemoryManager.instance) {
       MemoryManager.instance = new MemoryManager();
-      await MemoryManager.instance.init();
     }
     return MemoryManager.instance;
   }

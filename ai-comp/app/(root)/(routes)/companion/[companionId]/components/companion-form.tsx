@@ -105,7 +105,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
         await axios.post("/api/companion", values);
       }
       toast({
-        variant: "destructive",
+        variant: "default",
         description: "Success",
       });
 

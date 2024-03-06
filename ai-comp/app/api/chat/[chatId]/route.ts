@@ -1,8 +1,8 @@
 import { StreamingTextResponse, LangChainStream } from "ai";
-import { auth, currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
+import { Replicate } from "langchain/llms/replicate";
 import { CallbackManager } from "langchain/callbacks";
 import { NextResponse } from "next/server";
-import { Replicate } from "langchain/llms/replicate";
 
 import { MemoryManager } from "@/lib/memory";
 import { rateLimit } from "@/lib/rate-limit";
@@ -24,13 +24,12 @@ export async function POST(
     const { success } = await rateLimit(identifier);
 
     if (!success) {
-      return new NextResponse("Rate Limit Exceeded", { status: 429 });
+      return new NextResponse("Rate limit exceeded", { status: 429 });
     }
 
     const companion = await prismadb.companion.update({
       where: {
         id: params.chatId,
-        userId: user.id,
       },
       data: {
         messages: {
@@ -51,24 +50,26 @@ export async function POST(
     const companion_file_name = name + ".txt";
 
     const companionKey = {
-      companionName: name,
+      companionName: name!,
       userId: user.id,
       modelName: "llama2-13b",
     };
-
     const memoryManager = await MemoryManager.getInstance();
 
     const records = await memoryManager.readLatestHistory(companionKey);
-
     if (records.length === 0) {
       await memoryManager.seedChatHistory(companion.seed, "\n\n", companionKey);
     }
-
     await memoryManager.writeToHistory("User: " + prompt + "\n", companionKey);
+
+    // Query Pinecone
 
     const recentChatHistory = await memoryManager.readLatestHistory(
       companionKey
     );
+
+    // Right now the preamble is included in the similarity search, but that
+    // shouldn't be an issue
 
     const similarDocs = await memoryManager.vectorSearch(
       recentChatHistory,
@@ -76,13 +77,11 @@ export async function POST(
     );
 
     let relevantHistory = "";
-
     if (!!similarDocs && similarDocs.length !== 0) {
       relevantHistory = similarDocs.map((doc) => doc.pageContent).join("\n");
     }
-
     const { handlers } = LangChainStream();
-
+    // Call Replicate for inference
     const model = new Replicate({
       model:
         "a16z-infra/llama-2-13b-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5",
@@ -100,15 +99,15 @@ export async function POST(
       await model
         .call(
           `
-          ONLY generate plain sentences without prefix of who is speaking. DO NOT use ${companion.name}: prefix. 
-  
-          ${companion.instruction}
-  
-          Below are relevant details about ${companion.name}'s past and the conversation you are in.
-          ${relevantHistory}
-  
-  
-          ${recentChatHistory}\n${companion.name}:`
+        ONLY generate plain sentences without prefix of who is speaking. DO NOT use ${companion.name}: prefix. 
+
+        ${companion.instruction}
+
+        Below are relevant details about ${companion.name}'s past and the conversation you are in.
+        ${relevantHistory}
+
+
+        ${recentChatHistory}\n${companion.name}:`
         )
         .catch(console.error)
     );
@@ -144,7 +143,6 @@ export async function POST(
 
     return new StreamingTextResponse(s);
   } catch (error) {
-    console.log("[CHAT_POST]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new NextResponse("CHAT_POST_ERROR", { status: 500 });
   }
 }

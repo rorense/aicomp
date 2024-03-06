@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
     "@hookform/resolvers": "^3.3.4",
+    "@langchain/community": "^0.0.35",
     "@pinecone-database/pinecone": "^2.0.1",
     "@prisma/client": "^5.10.2",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -37,6 +38,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "react-spinners": "^0.13.8",
+    "replicate": "^0.18.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
