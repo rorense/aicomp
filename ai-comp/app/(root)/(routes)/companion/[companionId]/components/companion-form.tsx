@@ -131,7 +131,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
             <div>
               <h3 className="text-lg font-medium">General Information</h3>
               <p className="test-sm text-muted-foreground">
-                General about your companion
+                General information about your associate
               </p>
             </div>
             <Separator className="bg-primary/10" />
@@ -166,7 +166,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is how your Ai associate will be named.
+                    This is how your Ai associate will be named
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -186,7 +186,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
                     />
                   </FormControl>
                   <FormDescription>
-                    Short Description for your ai associate.
+                    Short description for your AI associate
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -232,7 +232,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
             <div>
               <h3 className="text-lg font-medium">Configuration</h3>
               <p className="text-sm text-muted-foreground">
-                Detailed Instructions for AI behaviour
+                Detailed instructions for AI behaviour
               </p>
             </div>
             <Separator className="bg-primary/10" />
@@ -276,7 +276,7 @@ const CompanionForm = ({ categories, initialData }: CompanionFormProps) => {
                   />
                 </FormControl>
                 <FormDescription>
-                  An example conversation between you and the associate.
+                  An example conversation between you and the associate
                 </FormDescription>
                 <FormMessage />
               </FormItem>
