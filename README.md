@@ -19,3 +19,4 @@ Tech Stacks Used:
 - Upstash Redis (Long term memory)
 - Langchain
 - OpenAI
+- Zustand (state management)
