@@ -1,4 +1,5 @@
 import prismadb from "@/lib/prismadb";
+import { checkSubscription } from "@/lib/subscription";
 import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -19,6 +20,12 @@ export async function POST(req: Request) {
     }
 
     // Check for subscriptions
+    const isPro = await checkSubscription();
+
+    // If not a pro user, return 403
+    if (!isPro) {
+      return new NextResponse("Pro Subscription required", { status: 403 });
+    }
 
     const companion = await prismadb.companion.create({
       data: {
