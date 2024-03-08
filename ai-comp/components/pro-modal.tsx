@@ -11,7 +11,7 @@ import {
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProModal = () => {
@@ -19,6 +19,12 @@ const ProModal = () => {
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
+
+  // Fix Hydration Error
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const onSubscribe = async () => {
     try {
@@ -34,6 +40,10 @@ const ProModal = () => {
       setLoading(false);
     }
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
